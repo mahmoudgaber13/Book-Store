@@ -1,0 +1,83 @@
+﻿@model IEnumerable<BookStore.Models.Book>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Books</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                Image
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author.FullName)
+                </td>
+                <td>
+                    @if (item.ImgUrl != null)
+                    {
+                        <img src="~/Uploads/@item.ImgUrl" alt="@item.ImgUrl" style="width:64px" class="img-fluid img-thumbnail" />
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $("#term").on("keyup", function () {
+        var name = $(this).val();
+        $("table tr").each(function (results) {
+            console.log(results);
+            if (results !== 0) {
+                var id = $(this).find("td:nth-child(2)").text();
+                if (id.indexOf(name) !== 0 && id.toLocaleLowerCase().indexOf(name.toLocaleLowerCase()) < 0) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+                }
+            }
+        })
+    });
+</script>

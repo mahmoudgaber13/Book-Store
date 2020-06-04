@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\Tegoo\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Tegoo\\.nuget\\packages"
+    ]
+  }
+}
